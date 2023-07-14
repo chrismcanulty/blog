@@ -13,13 +13,18 @@ export default function App() {
   const colorScheme = useColorScheme();
 
   const [loading, setLoading] = useState<boolean>(false);
+  const [blogPosts, setBlogPosts] = useState([
+    {title: 'Blog Post #1'},
+    {title: 'Blog Post #2'},
+  ]);
 
   useEffect(() => {
     SplashScreen.hide();
   });
 
   return (
-    <MyGlobalContext.Provider value={{loading, setLoading}}>
+    <MyGlobalContext.Provider
+      value={{loading, setLoading, blogPosts, setBlogPosts}}>
       <TailwindProvider>
         <PaperProvider>
           <SafeAreaProvider>
