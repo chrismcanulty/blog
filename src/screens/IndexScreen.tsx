@@ -4,6 +4,7 @@ import {useGlobalContext} from '../../context/User.Context';
 
 const IndexScreen = () => {
   const {blogPosts} = useGlobalContext();
+
   return (
     <View>
       <Text>Index Screen</Text>

@@ -17,6 +17,9 @@ export default function App() {
     {title: 'Blog Post #1'},
     {title: 'Blog Post #2'},
   ]);
+  const addBlogPost = async () => {
+    setBlogPosts([...blogPosts, {title: `Blog Post #${blogPosts.length + 1}`}]);
+  };
 
   useEffect(() => {
     SplashScreen.hide();
@@ -24,7 +27,7 @@ export default function App() {
 
   return (
     <MyGlobalContext.Provider
-      value={{loading, setLoading, blogPosts, setBlogPosts}}>
+      value={{loading, setLoading, blogPosts, setBlogPosts, addBlogPost}}>
       <TailwindProvider>
         <PaperProvider>
           <SafeAreaProvider>

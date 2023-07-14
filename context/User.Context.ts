@@ -5,13 +5,15 @@ export type GlobalContent = {
   setLoading: Dispatch<SetStateAction<boolean>>;
   blogPosts: {title: string}[];
   setBlogPosts: Dispatch<SetStateAction<{title: string}[]>>;
+  addBlogPost: () => {};
 };
 
 export const MyGlobalContext = createContext<GlobalContent>({
   loading: false,
   setLoading: () => {},
-  blogPosts: [{title: 'Blog Post #1'}, {title: 'Blog Post #2'}],
+  blogPosts: [],
   setBlogPosts: () => {},
+  addBlogPost: async () => {},
 });
 
 export const useGlobalContext = () => useContext(MyGlobalContext);
