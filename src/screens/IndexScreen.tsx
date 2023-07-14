@@ -1,13 +1,19 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
 import {useGlobalContext} from '../../context/User.Context';
 
 const IndexScreen = () => {
   const {blogPosts} = useGlobalContext();
   return (
     <View>
-      <Text>{blogPosts[0].title}</Text>
-      <Text>{blogPosts[1].title}</Text>
+      <Text>Index Screen</Text>
+      <FlatList
+        data={blogPosts}
+        keyExtractor={blogPost => blogPost.title}
+        renderItem={({item}) => {
+          return <Text>{item.title}</Text>;
+        }}
+      />
     </View>
   );
 };
