@@ -1,28 +1,13 @@
-import React, {useState, useEffect, useContext} from 'react';
-import {node} from 'prop-types';
+import {Dispatch, useContext, SetStateAction, createContext} from 'react';
 
-interface UserContextType {
-  /** Unique id of the item */
-  i: string;
-}
-
-export const UserContext = React.createContext<UserContextType | undefined>(
-  undefined,
-);
-
-const UserProvider = ({children}) => {
-  // define user context state here
-
-  const userContext = useContext(UserContext);
-  if (!userContext) {
-    throw new Error('No UserContext.Provider found when calling User Provider');
-  }
-  return userContext;
-  // define user context functions here, useEffect under those if needed
+export type GlobalContent = {
+  loading: boolean | undefined;
+  setLoading: Dispatch<SetStateAction<boolean>>;
 };
 
-UserProvider.propTypes = {
-  children: node.isRequired,
-};
+export const MyGlobalContext = createContext<GlobalContent>({
+  loading: false,
+  setLoading: () => {},
+});
 
-export default UserProvider;
+export const useGlobalContext = () => useContext(MyGlobalContext);
