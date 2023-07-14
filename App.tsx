@@ -12,7 +12,7 @@ import {Provider as PaperProvider} from 'react-native-paper';
 export default function App() {
   const colorScheme = useColorScheme();
 
-  const [loading, setLoading] = useState<boolean>(false);
+  // const [loading, setLoading] = useState<boolean>(false);
   const [blogPosts, setBlogPosts] = useState([
     {title: 'Blog Post #1'},
     {title: 'Blog Post #2'},
@@ -26,8 +26,7 @@ export default function App() {
   });
 
   return (
-    <MyGlobalContext.Provider
-      value={{loading, setLoading, blogPosts, setBlogPosts, addBlogPost}}>
+    <MyGlobalContext.Provider value={{blogPosts, setBlogPosts, addBlogPost}}>
       <TailwindProvider>
         <PaperProvider>
           <SafeAreaProvider>

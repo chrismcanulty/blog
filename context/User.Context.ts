@@ -1,16 +1,16 @@
 import {Dispatch, useContext, SetStateAction, createContext} from 'react';
 
 export type GlobalContent = {
-  loading: boolean | undefined;
-  setLoading: Dispatch<SetStateAction<boolean>>;
+  // loading: boolean | undefined;
+  // setLoading: Dispatch<SetStateAction<boolean>>;
   blogPosts: {title: string}[];
   setBlogPosts: Dispatch<SetStateAction<{title: string}[]>>;
   addBlogPost: () => {};
 };
 
 export const MyGlobalContext = createContext<GlobalContent>({
-  loading: false,
-  setLoading: () => {},
+  // loading: false,
+  // setLoading: () => {},
   blogPosts: [],
   setBlogPosts: () => {},
   addBlogPost: async () => {},
