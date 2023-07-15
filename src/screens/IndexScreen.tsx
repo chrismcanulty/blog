@@ -2,7 +2,7 @@ import React from 'react';
 import {View, FlatList, Button} from 'react-native';
 import {useBlogContext} from '../../context/BlogContext';
 import styled from 'styled-components/native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import DeleteIcon from 'react-native-vector-icons/FontAwesome';
 
 const BlogPost = styled.Text`
   color: rgb(38, 38, 38);
@@ -25,7 +25,7 @@ const IndexScreen = () => {
           return (
             <View>
               <BlogPost>{item.title}</BlogPost>
-              <Icon name="info-circle" size={30} color="#900" />
+              <DeleteIcon name="trash" size={30} color="#900" />
             </View>
           );
         }}
