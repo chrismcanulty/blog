@@ -1,19 +1,33 @@
 import React from 'react';
-import {View, Text, FlatList, Button} from 'react-native';
+import {View, FlatList, Button} from 'react-native';
 import {useBlogContext} from '../../context/BlogContext';
+import styled from 'styled-components/native';
+import Icon from 'react-native-vector-icons/FontAwesome';
+
+const BlogPost = styled.Text`
+  color: rgb(38, 38, 38);
+  font-family: 'Montserrat-Regular';
+  font-size: 14px;
+  margin-left: 20px;
+  text-align: left;
+`;
 
 const IndexScreen = () => {
   const {blogPosts, addBlogPost} = useBlogContext();
 
   return (
     <View>
-      <Text>Index Screen</Text>
       <Button title="Add Post" onPress={addBlogPost} />
       <FlatList
         data={blogPosts}
         keyExtractor={blogPost => blogPost.title}
         renderItem={({item}) => {
-          return <Text>{item.title}</Text>;
+          return (
+            <View>
+              <BlogPost>{item.title}</BlogPost>
+              <Icon name="info-circle" size={30} color="#900" />
+            </View>
+          );
         }}
       />
     </View>

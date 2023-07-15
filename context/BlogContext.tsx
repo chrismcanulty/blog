@@ -26,10 +26,7 @@ export const MyBlogContext = createContext<BlogContent>({
 });
 
 export function MyBlogProvider({children}: {children: React.ReactNode}) {
-  const [blogPosts, setBlogPosts] = useState([
-    {title: 'Blog Post #1'},
-    {title: 'Blog Post #2'},
-  ]);
+  const [blogPosts, setBlogPosts] = useState<BlogContent['blogPosts']>([]);
 
   const addBlogPost = useCallback(() => {
     setBlogPosts([...blogPosts, {title: `Blog Post #${blogPosts.length + 1}`}]);
