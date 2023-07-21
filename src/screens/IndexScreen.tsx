@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, FlatList, Button} from 'react-native';
+import {View, FlatList, Button, TouchableOpacity} from 'react-native';
 import {useBlogContext} from '../../context/BlogContext';
 import styled from 'styled-components/native';
 import DeleteIcon from 'react-native-vector-icons/FontAwesome';
@@ -20,19 +20,23 @@ const BlogView = styled.View`
 `;
 
 const IndexScreen = () => {
-  const {blogPosts, addBlogPost} = useBlogContext();
+  const {blogPosts, addBlogPost, deleteBlogPost} = useBlogContext();
 
   return (
     <View>
       <Button title="Add Post" onPress={addBlogPost} />
       <FlatList
         data={blogPosts}
-        keyExtractor={blogPost => blogPost.title}
-        renderItem={({item}) => {
+        keyExtractor={blogPost => `${blogPost.id}`}
+        renderItem={({item, index}) => {
           return (
             <BlogView>
-              <BlogPost>{item.title}</BlogPost>
-              <DeleteIcon name="trash" size={24} color="#900" />
+              <BlogPost>
+                {item.title} - {item.id}
+              </BlogPost>
+              <TouchableOpacity onPress={() => deleteBlogPost(index)}>
+                <DeleteIcon name="trash" size={24} color="#900" />
+              </TouchableOpacity>
             </BlogView>
           );
         }}

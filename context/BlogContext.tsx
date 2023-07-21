@@ -12,9 +12,10 @@ import {
 export type BlogContent = {
   // loading: boolean | undefined;
   // setLoading: Dispatch<SetStateAction<boolean>>;
-  blogPosts: {title: string}[];
-  setBlogPosts: Dispatch<SetStateAction<{title: string}[]>>;
+  blogPosts: {id: number; title: string}[];
+  setBlogPosts: Dispatch<SetStateAction<{id: number; title: string}[]>>;
   addBlogPost: () => void;
+  deleteBlogPost: (index: number) => void;
 };
 
 export const MyBlogContext = createContext<BlogContent>({
@@ -22,23 +23,41 @@ export const MyBlogContext = createContext<BlogContent>({
   // setLoading: () => {},
   blogPosts: [],
   setBlogPosts: () => {},
-  addBlogPost: async () => {},
+  addBlogPost: () => {},
+  deleteBlogPost: () => () => {},
 });
 
 export function MyBlogProvider({children}: {children: React.ReactNode}) {
   const [blogPosts, setBlogPosts] = useState<BlogContent['blogPosts']>([]);
 
   const addBlogPost = useCallback(() => {
-    setBlogPosts([...blogPosts, {title: `Blog Post #${blogPosts.length + 1}`}]);
+    setBlogPosts([
+      ...blogPosts,
+      {
+        id: Math.floor(Math.random() * 99999),
+        title: `Blog Post #${blogPosts.length + 1}`,
+      },
+    ]);
   }, [blogPosts]);
+
+  const deleteBlogPost = useCallback(
+    (index: number) => {
+      const tempBlogPosts = [...blogPosts];
+      // find blog post to delete based on post id
+      tempBlogPosts.splice(index, 1);
+      setBlogPosts(tempBlogPosts);
+    },
+    [blogPosts],
+  );
 
   const state = useMemo(
     () => ({
       blogPosts,
       setBlogPosts,
       addBlogPost,
+      deleteBlogPost,
     }),
-    [addBlogPost, blogPosts],
+    [addBlogPost, blogPosts, deleteBlogPost],
   );
 
   return (
