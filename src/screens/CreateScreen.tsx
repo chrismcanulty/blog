@@ -4,7 +4,7 @@ import {useBlogContext} from '../../context/BlogContext';
 import {NativeStackHeaderProps} from '@react-navigation/native-stack';
 // import styled from 'styled-components/native';
 
-const ShowScreen = ({
+const CreateScreen = ({
   navigation,
   route,
 }: {
@@ -13,16 +13,15 @@ const ShowScreen = ({
 }) => {
   const {blogPosts} = useBlogContext();
 
-  const blogId = route.params.id;
+  // const blogId = route.params.id;
 
-  const blogPost = blogPosts.find(post => post.id === blogId);
+  // const blogPost = blogPosts.find(post => post.id === blogId);
 
   return (
     <View>
-      <Text>Show Screen</Text>
-      <Text>Blog Id: {blogPost?.title}</Text>
+      <Text>Create Screen</Text>
     </View>
   );
 };
 
-export default ShowScreen;
+export default CreateScreen;

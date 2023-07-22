@@ -5,9 +5,11 @@ import {
   DarkTheme,
   DefaultTheme,
 } from '@react-navigation/native';
-import {ColorSchemeName} from 'react-native';
+import {ColorSchemeName, TouchableOpacity} from 'react-native';
 import IndexScreen from '../src/screens/IndexScreen';
 import ShowScreen from '../src/screens/ShowScreen';
+import CreateScreen from '../src/screens/CreateScreen';
+import PlusIcon from 'react-native-vector-icons/FontAwesome';
 
 export default function Navigation({
   colorScheme,
@@ -24,6 +26,14 @@ export default function Navigation({
 
 const Stack = createNativeStackNavigator();
 
+function HeaderButton({navigation}: any) {
+  return (
+    <TouchableOpacity onPress={() => navigation.navigate('Create')}>
+      <PlusIcon name="plus" size={24} color="#900" />
+    </TouchableOpacity>
+  );
+}
+
 function RootNavigator() {
   return (
     <Stack.Navigator initialRouteName="Index">
@@ -31,11 +41,19 @@ function RootNavigator() {
         <Stack.Screen
           name="Root"
           component={IndexScreen}
-          options={{title: ''}}
+          options={({navigation}) => ({
+            title: '',
+            headerRight: () => HeaderButton({navigation}),
+          })}
         />
         <Stack.Screen
           name="Show"
           component={ShowScreen}
+          options={{title: ''}}
+        />
+        <Stack.Screen
+          name="Create"
+          component={CreateScreen}
           options={{title: ''}}
         />
       </Stack.Group>
