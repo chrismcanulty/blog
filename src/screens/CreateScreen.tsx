@@ -2,19 +2,7 @@ import React from 'react';
 import {View, Text} from 'react-native';
 import {useBlogContext} from '../../context/BlogContext';
 import {NativeStackHeaderProps} from '@react-navigation/native-stack';
-import styled from 'styled-components/native';
-
-const ShowScreenText = styled.Text`
-  color: rgb(38, 38, 38);
-  font-family: 'Montserrat-Regular';
-  font-size: 18px;
-  padding-vertical: 20px;
-  text-align: left;
-`;
-const ShowScreenView = styled.View`
-  padding-vertical: 20px;
-  padding-horizontal: 10px;
-`;
+// import styled from 'styled-components/native';
 
 const ShowScreen = ({
   navigation,
@@ -30,10 +18,10 @@ const ShowScreen = ({
   const blogPost = blogPosts.find(post => post.id === blogId);
 
   return (
-    <ShowScreenView>
-      <ShowScreenText>Show Screen</ShowScreenText>
-      <ShowScreenText>Blog Id: {blogPost?.title}</ShowScreenText>
-    </ShowScreenView>
+    <View>
+      <Text>Show Screen</Text>
+      <Text>Blog Id: {blogPost?.title}</Text>
+    </View>
   );
 };
 
