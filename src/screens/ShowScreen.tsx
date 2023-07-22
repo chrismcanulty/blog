@@ -11,14 +11,16 @@ const ShowScreen = ({
   navigation: NativeStackHeaderProps;
   route: any;
 }) => {
-  const {} = useBlogContext();
+  const {blogPosts} = useBlogContext();
 
   const blogId = route.params.id;
+
+  const blogPost = blogPosts.find(post => post.id === blogId);
 
   return (
     <View>
       <Text>Show Screen</Text>
-      <Text>Blog Id: {blogId}</Text>
+      <Text>Blog Id: {blogPost?.title}</Text>
     </View>
   );
 };
