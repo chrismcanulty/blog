@@ -7,6 +7,7 @@ import {
 } from '@react-navigation/native';
 import {ColorSchemeName} from 'react-native';
 import IndexScreen from '../src/screens/IndexScreen';
+import ShowScreen from '../src/screens/ShowScreen';
 
 export default function Navigation({
   colorScheme,
@@ -30,6 +31,11 @@ function RootNavigator() {
         <Stack.Screen
           name="Root"
           component={IndexScreen}
+          options={{title: ''}}
+        />
+        <Stack.Screen
+          name="Show"
+          component={ShowScreen}
           options={{title: ''}}
         />
       </Stack.Group>

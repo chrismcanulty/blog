@@ -1,4 +1,5 @@
 import React from 'react';
+import {NativeStackHeaderProps} from '@react-navigation/native-stack';
 import {View, FlatList, Button, TouchableOpacity} from 'react-native';
 import {useBlogContext} from '../../context/BlogContext';
 import styled from 'styled-components/native';
@@ -19,7 +20,7 @@ const BlogView = styled.View`
   border-color: gray;
 `;
 
-const IndexScreen = () => {
+const IndexScreen = ({navigation}: NativeStackHeaderProps) => {
   const {blogPosts, addBlogPost, deleteBlogPost} = useBlogContext();
 
   return (
@@ -30,21 +31,22 @@ const IndexScreen = () => {
         keyExtractor={blogPost => `${blogPost.id}`}
         renderItem={({item, index}) => {
           return (
-            <BlogView>
-              <BlogPost>
-                {item.title} - {item.id}
-              </BlogPost>
-              <TouchableOpacity onPress={() => deleteBlogPost(index)}>
-                <DeleteIcon name="trash" size={24} color="#900" />
-              </TouchableOpacity>
-            </BlogView>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Show', {id: item.id})}>
+              <BlogView>
+                <BlogPost>
+                  {item.title} - {item.id}
+                </BlogPost>
+                <TouchableOpacity onPress={() => deleteBlogPost(index)}>
+                  <DeleteIcon name="trash" size={24} color="#900" />
+                </TouchableOpacity>
+              </BlogView>
+            </TouchableOpacity>
           );
         }}
       />
     </View>
   );
 };
-
-// const styles = StyleSheet.create({});
 
 export default IndexScreen;
