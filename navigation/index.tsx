@@ -29,7 +29,7 @@ const Stack = createNativeStackNavigator();
 function HeaderButton({navigation}: any) {
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Create')}>
-      <PlusIcon name="plus" size={24} color="#900" />
+      <PlusIcon name="plus" size={24} color="black" />
     </TouchableOpacity>
   );
 }

@@ -1,7 +1,5 @@
 import React from 'react';
-import {View, Text} from 'react-native';
 import {useBlogContext} from '../../context/BlogContext';
-import {NativeStackHeaderProps} from '@react-navigation/native-stack';
 import styled from 'styled-components/native';
 
 const ShowScreenText = styled.Text`
@@ -17,10 +15,10 @@ const ShowScreenView = styled.View`
 `;
 
 const ShowScreen = ({
-  navigation,
+  // navigation,
   route,
 }: {
-  navigation: NativeStackHeaderProps;
+  // navigation: NativeStackHeaderProps;
   route: any;
 }) => {
   const {blogPosts} = useBlogContext();
