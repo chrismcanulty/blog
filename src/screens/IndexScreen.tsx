@@ -20,11 +20,16 @@ const BlogView = styled.View`
 `;
 
 const IndexScreen = ({navigation}: any) => {
-  const {blogPosts, addBlogPost, deleteBlogPost} = useBlogContext();
+  const {blogPosts, deleteBlogPost} = useBlogContext();
 
   return (
     <View>
-      <Button title="Add Post" onPress={addBlogPost} />
+      <Button
+        title="Add Post"
+        onPress={() => {
+          navigation.navigate('Create');
+        }}
+      />
       <FlatList
         data={blogPosts}
         keyExtractor={blogPost => `${blogPost.id}`}

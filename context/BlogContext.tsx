@@ -16,7 +16,7 @@ export type BlogContent = {
   setBlogPosts: Dispatch<
     SetStateAction<{id: number; title: string; content: string}[]>
   >;
-  addBlogPost: (title: string, content: string) => void;
+  addBlogPost: (title: string, content: string, callback: () => void) => void;
   deleteBlogPost: (index: number) => void;
 };
 
@@ -33,15 +33,16 @@ export function MyBlogProvider({children}: {children: React.ReactNode}) {
   const [blogPosts, setBlogPosts] = useState<BlogContent['blogPosts']>([]);
 
   const addBlogPost = useCallback(
-    (title: string, content: string) => {
+    (title: string, content: string, callback: () => void) => {
       setBlogPosts([
         ...blogPosts,
         {
           id: Math.floor(Math.random() * 99999),
-          title: `Blog Post #${blogPosts.length + 1} ${title}`,
+          title: title,
           content: content,
         },
       ]);
+      callback();
     },
     [blogPosts],
   );

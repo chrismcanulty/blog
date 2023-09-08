@@ -21,7 +21,7 @@ const InputLabel = styled.Text`
   margin-left: 5px;
 `;
 
-const CreateScreen = () => {
+const CreateScreen = ({navigation}: any) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const {addBlogPost} = useBlogContext();
@@ -38,7 +38,11 @@ const CreateScreen = () => {
       <InputField value={content} onChangeText={text => setContent(text)} />
       <Button
         title="Add Blog Post"
-        onPress={() => addBlogPost(title, content)}
+        onPress={() => {
+          addBlogPost(title, content, () => {
+            navigation.navigate('Root');
+          });
+        }}
       />
     </View>
   );
