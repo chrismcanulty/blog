@@ -12,9 +12,11 @@ import {
 export type BlogContent = {
   // loading: boolean | undefined;
   // setLoading: Dispatch<SetStateAction<boolean>>;
-  blogPosts: {id: number; title: string}[];
-  setBlogPosts: Dispatch<SetStateAction<{id: number; title: string}[]>>;
-  addBlogPost: () => void;
+  blogPosts: {id: number; title: string; content: string}[];
+  setBlogPosts: Dispatch<
+    SetStateAction<{id: number; title: string; content: string}[]>
+  >;
+  addBlogPost: (title: string, content: string) => void;
   deleteBlogPost: (index: number) => void;
 };
 
@@ -30,15 +32,19 @@ export const MyBlogContext = createContext<BlogContent>({
 export function MyBlogProvider({children}: {children: React.ReactNode}) {
   const [blogPosts, setBlogPosts] = useState<BlogContent['blogPosts']>([]);
 
-  const addBlogPost = useCallback(() => {
-    setBlogPosts([
-      ...blogPosts,
-      {
-        id: Math.floor(Math.random() * 99999),
-        title: `Blog Post #${blogPosts.length + 1}`,
-      },
-    ]);
-  }, [blogPosts]);
+  const addBlogPost = useCallback(
+    (title: string, content: string) => {
+      setBlogPosts([
+        ...blogPosts,
+        {
+          id: Math.floor(Math.random() * 99999),
+          title: `Blog Post #${blogPosts.length + 1} ${title}`,
+          content: content,
+        },
+      ]);
+    },
+    [blogPosts],
+  );
 
   const deleteBlogPost = useCallback(
     (index: number) => {

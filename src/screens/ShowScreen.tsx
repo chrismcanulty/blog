@@ -29,8 +29,9 @@ const ShowScreen = ({
 
   return (
     <ShowScreenView>
-      <ShowScreenText>Show Screen</ShowScreenText>
-      <ShowScreenText>Blog Id: {blogPost?.title}</ShowScreenText>
+      {/* <ShowScreenText>Show Screen</ShowScreenText> */}
+      <ShowScreenText>Title: {blogPost?.title}</ShowScreenText>
+      <ShowScreenText>Content: {blogPost?.content}</ShowScreenText>
     </ShowScreenView>
   );
 };

@@ -1,12 +1,12 @@
 import React, {useState} from 'react';
 import {View, Button} from 'react-native';
-// import {useBlogContext} from '../../context/BlogContext';
+import {useBlogContext} from '../../context/BlogContext';
 // import {NativeStackHeaderProps} from '@react-navigation/native-stack';
 import styled from 'styled-components/native';
 
 const InputField = styled.TextInput`
   border-color: black;
-  border-width: 1;
+  border-width: 1px;
   color: rgb(38, 38, 38);
   font-family: 'Montserrat-Regular';
   font-size: 18px;
@@ -24,7 +24,7 @@ const InputLabel = styled.Text`
 const CreateScreen = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
-  // const {blogPosts} = useBlogContext();
+  const {addBlogPost} = useBlogContext();
 
   // const blogId = route.params.id;
 
@@ -36,7 +36,10 @@ const CreateScreen = () => {
       <InputField value={title} onChangeText={text => setTitle(text)} />
       <InputLabel>Enter Content:</InputLabel>
       <InputField value={content} onChangeText={text => setContent(text)} />
-      <Button title="Add Blog Post" />
+      <Button
+        title="Add Blog Post"
+        onPress={() => addBlogPost(title, content)}
+      />
     </View>
   );
 };
