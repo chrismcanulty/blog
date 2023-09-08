@@ -10,6 +10,7 @@ import IndexScreen from '../src/screens/IndexScreen';
 import ShowScreen from '../src/screens/ShowScreen';
 import CreateScreen from '../src/screens/CreateScreen';
 import PlusIcon from 'react-native-vector-icons/FontAwesome';
+import EditIcon from 'react-native-vector-icons/FontAwesome';
 
 export default function Navigation({
   colorScheme,
@@ -29,7 +30,15 @@ const Stack = createNativeStackNavigator();
 function HeaderButton({navigation}: any) {
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Create')}>
-      <PlusIcon name="plus" size={24} color="black" />
+      <PlusIcon name="plus" size={26} color="black" />
+    </TouchableOpacity>
+  );
+}
+
+function EditButton({navigation}: any) {
+  return (
+    <TouchableOpacity onPress={() => navigation.navigate('Edit')}>
+      <EditIcon name="pencil" size={28} color="black" />
     </TouchableOpacity>
   );
 }
@@ -49,7 +58,10 @@ function RootNavigator() {
         <Stack.Screen
           name="Show"
           component={ShowScreen}
-          options={{title: ''}}
+          options={({navigation}) => ({
+            title: '',
+            headerRight: () => EditButton({navigation}),
+          })}
         />
         <Stack.Screen
           name="Create"

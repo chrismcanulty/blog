@@ -14,13 +14,7 @@ const ShowScreenView = styled.View`
   padding-horizontal: 10px;
 `;
 
-const ShowScreen = ({
-  // navigation,
-  route,
-}: {
-  // navigation: NativeStackHeaderProps;
-  route: any;
-}) => {
+const ShowScreen = ({route}: {route: any}) => {
   const {blogPosts} = useBlogContext();
 
   const blogId = route.params.id;
@@ -29,9 +23,8 @@ const ShowScreen = ({
 
   return (
     <ShowScreenView>
-      {/* <ShowScreenText>Show Screen</ShowScreenText> */}
-      <ShowScreenText>Title: {blogPost?.title}</ShowScreenText>
-      <ShowScreenText>Content: {blogPost?.content}</ShowScreenText>
+      <ShowScreenText>{blogPost?.title}</ShowScreenText>
+      <ShowScreenText>{blogPost?.content}</ShowScreenText>
     </ShowScreenView>
   );
 };

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {View, Button} from 'react-native';
 import {useBlogContext} from '../../context/BlogContext';
-// import {NativeStackHeaderProps} from '@react-navigation/native-stack';
+import {NativeStackHeaderProps} from '@react-navigation/native-stack';
 import styled from 'styled-components/native';
 
 const InputField = styled.TextInput`
@@ -21,7 +21,7 @@ const InputLabel = styled.Text`
   margin-left: 5px;
 `;
 
-const CreateScreen = ({navigation}: any) => {
+const CreateScreen = ({navigation}: NativeStackHeaderProps) => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const {addBlogPost} = useBlogContext();

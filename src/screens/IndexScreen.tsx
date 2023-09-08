@@ -1,7 +1,8 @@
 import React from 'react';
-import {View, FlatList, Button, TouchableOpacity} from 'react-native';
+import {View, FlatList, TouchableOpacity} from 'react-native';
 import {useBlogContext} from '../../context/BlogContext';
 import styled from 'styled-components/native';
+import {NativeStackHeaderProps} from '@react-navigation/native-stack';
 import DeleteIcon from 'react-native-vector-icons/FontAwesome';
 
 const BlogPost = styled.Text`
@@ -19,7 +20,7 @@ const BlogView = styled.View`
   border-color: gray;
 `;
 
-const IndexScreen = ({navigation}: any) => {
+const IndexScreen = ({navigation}: NativeStackHeaderProps) => {
   const {blogPosts, deleteBlogPost} = useBlogContext();
 
   return (
