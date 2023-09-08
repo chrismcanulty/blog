@@ -24,12 +24,6 @@ const IndexScreen = ({navigation}: any) => {
 
   return (
     <View>
-      <Button
-        title="Add Post"
-        onPress={() => {
-          navigation.navigate('Create');
-        }}
-      />
       <FlatList
         data={blogPosts}
         keyExtractor={blogPost => `${blogPost.id}`}
