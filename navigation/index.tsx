@@ -9,6 +9,7 @@ import {ColorSchemeName, TouchableOpacity} from 'react-native';
 import IndexScreen from '../src/screens/IndexScreen';
 import ShowScreen from '../src/screens/ShowScreen';
 import CreateScreen from '../src/screens/CreateScreen';
+import EditScreen from '../src/screens/EditScreen';
 import PlusIcon from 'react-native-vector-icons/FontAwesome';
 import EditIcon from 'react-native-vector-icons/FontAwesome';
 
@@ -66,6 +67,11 @@ function RootNavigator() {
         <Stack.Screen
           name="Create"
           component={CreateScreen}
+          options={{title: ''}}
+        />
+        <Stack.Screen
+          name="Edit"
+          component={EditScreen}
           options={{title: ''}}
         />
       </Stack.Group>
