@@ -18,6 +18,10 @@ export type BlogContent = {
   >;
   addBlogPost: (title: string, content: string, callback: () => void) => void;
   deleteBlogPost: (index: number) => void;
+  currentPost: {id: number; title: string; content: string};
+  setCurrentPost: Dispatch<
+    SetStateAction<{id: number; title: string; content: string}>
+  >;
 };
 
 export const MyBlogContext = createContext<BlogContent>({
@@ -27,10 +31,17 @@ export const MyBlogContext = createContext<BlogContent>({
   setBlogPosts: () => {},
   addBlogPost: () => {},
   deleteBlogPost: () => () => {},
+  currentPost: {
+    id: 0,
+    title: '',
+    content: '',
+  },
+  setCurrentPost: () => {},
 });
 
 export function MyBlogProvider({children}: {children: React.ReactNode}) {
   const [blogPosts, setBlogPosts] = useState<BlogContent['blogPosts']>([]);
+  const [currentPost, setCurrentPost] = useState<BlogContent['currentPost']>();
 
   const addBlogPost = useCallback(
     (title: string, content: string, callback: () => void) => {
@@ -63,8 +74,10 @@ export function MyBlogProvider({children}: {children: React.ReactNode}) {
       setBlogPosts,
       addBlogPost,
       deleteBlogPost,
+      currentPost,
+      setCurrentPost,
     }),
-    [addBlogPost, blogPosts, deleteBlogPost],
+    [addBlogPost, blogPosts, currentPost, deleteBlogPost],
   );
 
   return (

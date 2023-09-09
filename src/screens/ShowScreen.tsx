@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useBlogContext} from '../../context/BlogContext';
 import styled from 'styled-components/native';
 
@@ -15,11 +15,13 @@ const ShowScreenView = styled.View`
 `;
 
 const ShowScreen = ({route}: {route: any}) => {
-  const {blogPosts} = useBlogContext();
+  const {blogPosts, setCurrentPost} = useBlogContext();
 
   const blogId = route.params.id;
 
   const blogPost = blogPosts.find(post => post.id === blogId);
+
+  setCurrentPost(blogPost);
 
   return (
     <ShowScreenView>

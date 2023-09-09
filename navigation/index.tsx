@@ -12,6 +12,7 @@ import CreateScreen from '../src/screens/CreateScreen';
 import EditScreen from '../src/screens/EditScreen';
 import PlusIcon from 'react-native-vector-icons/FontAwesome';
 import EditIcon from 'react-native-vector-icons/FontAwesome';
+import {useBlogContext} from '../context/BlogContext';
 
 export default function Navigation({
   colorScheme,
@@ -36,9 +37,13 @@ function HeaderButton({navigation}: any) {
   );
 }
 
-function EditButton({navigation}: any) {
+function EditButton({navigation, route}: any) {
+  const {blogPosts} = useBlogContext();
+  const blogId = route?.params?.id;
+  const blogPost = blogPosts.find(post => post.id === blogId);
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('Edit')}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate('Edit', {post: blogPost})}>
       <EditIcon name="pencil" size={28} color="black" />
     </TouchableOpacity>
   );
@@ -59,9 +64,10 @@ function RootNavigator() {
         <Stack.Screen
           name="Show"
           component={ShowScreen}
-          options={({navigation}) => ({
+          options={({navigation, route}) => ({
             title: '',
             headerRight: () => EditButton({navigation}),
+            data: route.params,
           })}
         />
         <Stack.Screen
