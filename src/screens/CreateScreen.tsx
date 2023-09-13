@@ -10,12 +10,11 @@ const CreateScreen = ({navigation}: NativeStackHeaderProps) => {
 
   // const blogPost = blogPosts.find(post => post.id === blogId);
 
-  const initialTitle = '';
-  const initialContent = '';
+  // const initialTitle = '';
+  // const initialContent = '';
 
   return (
     <BlogPostForm
-      initialValues={{initialTitle, initialContent}}
       onSubmit={(title: string, content: string) => {
         return addBlogPost(title, content, () => {
           navigation.navigate('Root');

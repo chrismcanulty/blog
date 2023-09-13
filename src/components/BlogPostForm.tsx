@@ -48,4 +48,11 @@ const BlogPostForm = ({
   );
 };
 
+BlogPostForm.defaultProps = {
+  initialValues: {
+    initialTitle: '',
+    initialContent: '',
+  },
+};
+
 export default BlogPostForm;
