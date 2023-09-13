@@ -85,7 +85,7 @@ export function MyBlogProvider({children}: {children: React.ReactNode}) {
       callback: () => void,
     ) => {
       const tempBlogPosts = [...blogPosts];
-      // find blog post to delete based on post id
+      // find blog post to modify based on post id
       tempBlogPosts.splice(index, 1, {id, title, content});
       setBlogPosts(tempBlogPosts);
       callback();
