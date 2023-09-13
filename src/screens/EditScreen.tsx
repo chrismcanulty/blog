@@ -1,18 +1,30 @@
 import React from 'react';
 import BlogPostForm from '../components/BlogPostForm';
 import {useBlogContext} from '../../context/BlogContext';
+import {NativeStackHeaderProps} from '@react-navigation/native-stack';
 
-const EditScreen = () => {
+const EditScreen = ({
+  navigation,
+  route,
+}: {
+  navigation: NativeStackHeaderProps['navigation'];
+  route: any;
+}) => {
   const {currentPost} = useBlogContext();
   const {title: initialTitle, content: initialContent} = currentPost;
-  // const [title, setTitle] = useState(initialTitle);
-  // const [content, setContent] = useState(initialContent);
+  const {editBlogPost, blogPosts} = useBlogContext();
+
+  const blogId = route?.params?.id;
+
+  const blogIndex = blogPosts.findIndex(post => post.id === blogId);
 
   return (
     <BlogPostForm
       initialValues={{initialTitle, initialContent}}
       onSubmit={(title: string, content: string) => {
-        console.log(title, content);
+        return editBlogPost(blogIndex, blogId, title, content, () => {
+          navigation.navigate('Root');
+        });
       }}
     />
   );

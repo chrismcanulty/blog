@@ -18,6 +18,13 @@ export type BlogContent = {
   >;
   addBlogPost: (title: string, content: string, callback: () => void) => void;
   deleteBlogPost: (index: number) => void;
+  editBlogPost: (
+    index: number,
+    id: number,
+    title: string,
+    content: string,
+    callback: () => void,
+  ) => void;
   currentPost: {id: number; title: string; content: string};
   setCurrentPost: Dispatch<
     SetStateAction<{id: number; title: string; content: string} | undefined>
@@ -30,7 +37,8 @@ export const MyBlogContext = createContext<BlogContent>({
   blogPosts: [],
   setBlogPosts: () => {},
   addBlogPost: () => {},
-  deleteBlogPost: () => () => {},
+  deleteBlogPost: () => {},
+  editBlogPost: () => {},
   currentPost: {
     id: 0,
     title: '',
@@ -68,16 +76,34 @@ export function MyBlogProvider({children}: {children: React.ReactNode}) {
     [blogPosts],
   );
 
+  const editBlogPost = useCallback(
+    (
+      index: number,
+      id: number,
+      title: string,
+      content: string,
+      callback: () => void,
+    ) => {
+      const tempBlogPosts = [...blogPosts];
+      // find blog post to delete based on post id
+      tempBlogPosts.splice(index, 1, {id, title, content});
+      setBlogPosts(tempBlogPosts);
+      callback();
+    },
+    [blogPosts],
+  );
+
   const state = useMemo(
     () => ({
       blogPosts,
       setBlogPosts,
       addBlogPost,
       deleteBlogPost,
+      editBlogPost,
       currentPost,
       setCurrentPost,
     }),
-    [addBlogPost, blogPosts, currentPost, deleteBlogPost],
+    [addBlogPost, blogPosts, currentPost, deleteBlogPost, editBlogPost],
   );
 
   return (
