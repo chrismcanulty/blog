@@ -19,9 +19,15 @@ const InputLabel = styled.Text`
   margin-left: 5px;
 `;
 
-const BlogPostForm = () => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+const BlogPostForm = ({
+  initialValues,
+  onSubmit,
+}: {
+  initialValues: {initialTitle: string; initialContent: string};
+  onSubmit: (title: string, content: string) => void;
+}) => {
+  const [title, setTitle] = useState(initialValues.initialTitle);
+  const [content, setContent] = useState(initialValues.initialContent);
 
   return (
     <View>
@@ -29,7 +35,7 @@ const BlogPostForm = () => {
       <InputField value={title} onChangeText={text => setTitle(text)} />
       <InputLabel>Enter Content:</InputLabel>
       <InputField value={content} onChangeText={text => setContent(text)} />
-      <Button title="Save Blog Post" onPress={() => {}} />
+      <Button title="Save Blog Post" onPress={() => onSubmit(title, content)} />
       {/* <Button
         title="Add Blog Post"
         onPress={() => {

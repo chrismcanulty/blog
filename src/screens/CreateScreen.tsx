@@ -10,23 +10,19 @@ const CreateScreen = ({navigation}: NativeStackHeaderProps) => {
 
   // const blogPost = blogPosts.find(post => post.id === blogId);
 
-  return <BlogPostForm />;
-  // (
-  //   <View>
-  //     <InputLabel>Enter Title:</InputLabel>
-  //     <InputField value={title} onChangeText={text => setTitle(text)} />
-  //     <InputLabel>Enter Content:</InputLabel>
-  //     <InputField value={content} onChangeText={text => setContent(text)} />
-  //     <Button
-  //       title="Add Blog Post"
-  //       onPress={() => {
-  //         addBlogPost(title, content, () => {
-  //           navigation.navigate('Root');
-  //         });
-  //       }}
-  //     />
-  //   </View>
-  // );
+  const initialTitle = '';
+  const initialContent = '';
+
+  return (
+    <BlogPostForm
+      initialValues={{initialTitle, initialContent}}
+      onSubmit={(title: string, content: string) => {
+        return addBlogPost(title, content, () => {
+          navigation.navigate('Root');
+        });
+      }}
+    />
+  );
 };
 
 export default CreateScreen;

@@ -1,13 +1,21 @@
 import React from 'react';
 import BlogPostForm from '../components/BlogPostForm';
+import {useBlogContext} from '../../context/BlogContext';
 
 const EditScreen = () => {
-  // const {currentPost} = useBlogContext();
-  // const {title: initialTitle, content: initialContent, id} = currentPost;
+  const {currentPost} = useBlogContext();
+  const {title: initialTitle, content: initialContent} = currentPost;
   // const [title, setTitle] = useState(initialTitle);
   // const [content, setContent] = useState(initialContent);
 
-  return <BlogPostForm />;
+  return (
+    <BlogPostForm
+      initialValues={{initialTitle, initialContent}}
+      onSubmit={(title: string, content: string) => {
+        console.log(title, content);
+      }}
+    />
+  );
   // (
   //   <View>
   //     <InputLabel>Enter Title:</InputLabel>
