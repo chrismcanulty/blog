@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useBlogContext} from '../../context/BlogContext';
 import styled from 'styled-components/native';
 

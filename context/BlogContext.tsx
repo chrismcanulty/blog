@@ -20,7 +20,7 @@ export type BlogContent = {
   deleteBlogPost: (index: number) => void;
   currentPost: {id: number; title: string; content: string};
   setCurrentPost: Dispatch<
-    SetStateAction<{id: number; title: string; content: string}>
+    SetStateAction<{id: number; title: string; content: string} | undefined>
   >;
 };
 
