@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
-import {View} from 'react-native';
+import {Button, View} from 'react-native';
 import styled from 'styled-components/native';
-import {useBlogContext} from '../../context/BlogContext';
 
 const InputField = styled.TextInput`
   border-color: black;
@@ -21,10 +20,8 @@ const InputLabel = styled.Text`
 `;
 
 const BlogPostForm = () => {
-  const {currentPost} = useBlogContext();
-  const {title: initialTitle, content: initialContent, id} = currentPost;
-  const [title, setTitle] = useState(initialTitle);
-  const [content, setContent] = useState(initialContent);
+  const [title, setTitle] = useState('');
+  const [content, setContent] = useState('');
 
   return (
     <View>
@@ -32,15 +29,7 @@ const BlogPostForm = () => {
       <InputField value={title} onChangeText={text => setTitle(text)} />
       <InputLabel>Enter Content:</InputLabel>
       <InputField value={content} onChangeText={text => setContent(text)} />
-      {/* <Button
-        title="Add Blog Post"
-        onPress={() => {
-          addBlogPost(title, content, () => {
-            navigation.navigate('Root');
-          });
-        }}
-      /> */}
-      <InputLabel>{id}</InputLabel>
+      <Button title="Save Blog Post" onPress={() => {}} />
     </View>
   );
 };

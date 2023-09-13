@@ -3,6 +3,7 @@ import {View, Button} from 'react-native';
 import {useBlogContext} from '../../context/BlogContext';
 import {NativeStackHeaderProps} from '@react-navigation/native-stack';
 import styled from 'styled-components/native';
+import BlogPostForm from '../components/BlogPostForm';
 
 const InputField = styled.TextInput`
   border-color: black;
@@ -30,22 +31,23 @@ const CreateScreen = ({navigation}: NativeStackHeaderProps) => {
 
   // const blogPost = blogPosts.find(post => post.id === blogId);
 
-  return (
-    <View>
-      <InputLabel>Enter Title:</InputLabel>
-      <InputField value={title} onChangeText={text => setTitle(text)} />
-      <InputLabel>Enter Content:</InputLabel>
-      <InputField value={content} onChangeText={text => setContent(text)} />
-      <Button
-        title="Add Blog Post"
-        onPress={() => {
-          addBlogPost(title, content, () => {
-            navigation.navigate('Root');
-          });
-        }}
-      />
-    </View>
-  );
+  return <BlogPostForm />;
+  // (
+  //   <View>
+  //     <InputLabel>Enter Title:</InputLabel>
+  //     <InputField value={title} onChangeText={text => setTitle(text)} />
+  //     <InputLabel>Enter Content:</InputLabel>
+  //     <InputField value={content} onChangeText={text => setContent(text)} />
+  //     <Button
+  //       title="Add Blog Post"
+  //       onPress={() => {
+  //         addBlogPost(title, content, () => {
+  //           navigation.navigate('Root');
+  //         });
+  //       }}
+  //     />
+  //   </View>
+  // );
 };
 
 export default CreateScreen;
