@@ -23,7 +23,7 @@ const EditScreen = ({navigation}: NativeStackHeaderProps) => {
         initialValues={{initialTitle, initialContent}}
         onSubmit={(title: string, content: string) => {
           return editBlogPost(blogIndex, blogId, title, content, () => {
-            navigation.navigate('Root');
+            navigation.pop();
           });
         }}
       />
