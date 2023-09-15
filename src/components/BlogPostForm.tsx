@@ -36,14 +36,6 @@ const BlogPostForm = ({
       <InputLabel>Enter Content:</InputLabel>
       <InputField value={content} onChangeText={text => setContent(text)} />
       <Button title="Save Blog Post" onPress={() => onSubmit(title, content)} />
-      {/* <Button
-        title="Add Blog Post"
-        onPress={() => {
-          addBlogPost(title, content, () => {
-            navigation.navigate('Root');
-          });
-        }}
-      /> */}
     </View>
   );
 };

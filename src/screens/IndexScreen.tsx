@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {View, FlatList, TouchableOpacity} from 'react-native';
+import {FlatList, TouchableOpacity} from 'react-native';
 import {useBlogContext} from '../../context/BlogContext';
 import styled from 'styled-components/native';
 import DeleteIcon from 'react-native-vector-icons/FontAwesome';
@@ -36,27 +36,25 @@ const IndexScreen = ({navigation}: any) => {
   }, [navigation, getBlogPosts]);
 
   return (
-    <View>
-      <FlatList
-        data={blogPosts}
-        keyExtractor={blogPost => `${blogPost.id}`}
-        renderItem={({item}) => {
-          return (
-            <TouchableOpacity
-              onPress={() => navigation.navigate('Show', {id: item.id})}>
-              <BlogView>
-                <BlogPost>
-                  {item.title} - {item.id}
-                </BlogPost>
-                <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
-                  <DeleteIcon name="trash" size={24} color="#900" />
-                </TouchableOpacity>
-              </BlogView>
-            </TouchableOpacity>
-          );
-        }}
-      />
-    </View>
+    <FlatList
+      data={blogPosts}
+      keyExtractor={blogPost => `${blogPost.id}`}
+      renderItem={({item}) => {
+        return (
+          <TouchableOpacity
+            onPress={() => navigation.navigate('Show', {id: item.id})}>
+            <BlogView>
+              <BlogPost>
+                {item.title} - {item.id}
+              </BlogPost>
+              <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
+                <DeleteIcon name="trash" size={24} color="#900" />
+              </TouchableOpacity>
+            </BlogView>
+          </TouchableOpacity>
+        );
+      }}
+    />
   );
 };
 
