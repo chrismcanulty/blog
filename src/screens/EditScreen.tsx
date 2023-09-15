@@ -2,7 +2,6 @@ import React from 'react';
 import BlogPostForm from '../components/BlogPostForm';
 import {useBlogContext} from '../../context/BlogContext';
 import {NativeStackHeaderProps} from '@react-navigation/native-stack';
-import {Text} from 'react-native';
 
 const EditScreen = ({navigation}: NativeStackHeaderProps) => {
   const {currentPost} = useBlogContext();
@@ -23,7 +22,6 @@ const EditScreen = ({navigation}: NativeStackHeaderProps) => {
           });
         }}
       />
-      <Text>Blog id - {blogId}</Text>
     </>
   );
 };
