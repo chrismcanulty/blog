@@ -20,7 +20,6 @@ export type BlogContent = {
   addBlogPost: (title: string, content: string, callback: () => void) => void;
   deleteBlogPost: (index: number) => void;
   editBlogPost: (
-    index: number,
     id: number,
     title: string,
     content: string,
@@ -67,7 +66,11 @@ export function MyBlogProvider({children}: {children: React.ReactNode}) {
 
   const addBlogPost = useCallback(
     async (title: string, content: string, callback: () => void) => {
-      await jsonServer.post('/blogposts', {title, content});
+      try {
+        await jsonServer.post('/blogposts', {title, content});
+      } catch (err: any) {
+        setErrorMessage(err);
+      }
       callback();
     },
     [],
@@ -75,27 +78,32 @@ export function MyBlogProvider({children}: {children: React.ReactNode}) {
 
   const deleteBlogPost = useCallback(
     async (id: number) => {
-      await jsonServer.delete(`/blogposts/${id}`);
-      getBlogPosts();
+      try {
+        await jsonServer.delete(`/blogposts/${id}`);
+        getBlogPosts();
+      } catch (err: any) {
+        setErrorMessage(err);
+      }
     },
     [getBlogPosts],
   );
 
   const editBlogPost = useCallback(
-    (
-      index: number,
+    async (
       id: number,
       title: string,
       content: string,
       callback: () => void,
     ) => {
-      const tempBlogPosts = [...blogPosts];
-      // find blog post to modify based on post id
-      tempBlogPosts.splice(index, 1, {id, title, content});
-      setBlogPosts(tempBlogPosts);
+      try {
+        await jsonServer.put(`/blogposts/${id}`, {title, content});
+        getBlogPosts();
+      } catch (err: any) {
+        setErrorMessage(err);
+      }
       callback();
     },
-    [blogPosts],
+    [getBlogPosts],
   );
 
   const state = useMemo(

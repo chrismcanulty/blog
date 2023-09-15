@@ -11,18 +11,14 @@ const EditScreen = ({navigation}: NativeStackHeaderProps) => {
     content: initialContent,
     id: blogId,
   } = currentPost;
-  const {editBlogPost, blogPosts} = useBlogContext();
-
-  const blogIndex = blogPosts.findIndex(post => post.id === blogId);
-
-  console.log(blogId);
+  const {editBlogPost} = useBlogContext();
 
   return (
     <>
       <BlogPostForm
         initialValues={{initialTitle, initialContent}}
         onSubmit={(title: string, content: string) => {
-          return editBlogPost(blogIndex, blogId, title, content, () => {
+          return editBlogPost(blogId, title, content, () => {
             navigation.pop();
           });
         }}
