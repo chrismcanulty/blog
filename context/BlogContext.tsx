@@ -8,6 +8,7 @@ import {
   useMemo,
   useCallback,
 } from 'react';
+import jsonServer from '../src/api/jsonServer';
 
 export type BlogContent = {
   // loading: boolean | undefined;
@@ -25,6 +26,7 @@ export type BlogContent = {
     content: string,
     callback: () => void,
   ) => void;
+  getBlogPosts: () => void;
   currentPost: {id: number; title: string; content: string};
   setCurrentPost: Dispatch<
     SetStateAction<{id: number; title: string; content: string} | undefined>
@@ -39,6 +41,7 @@ export const MyBlogContext = createContext<BlogContent>({
   addBlogPost: () => {},
   deleteBlogPost: () => {},
   editBlogPost: () => {},
+  getBlogPosts: () => {},
   currentPost: {
     id: 0,
     title: '',
@@ -50,6 +53,16 @@ export const MyBlogContext = createContext<BlogContent>({
 export function MyBlogProvider({children}: {children: React.ReactNode}) {
   const [blogPosts, setBlogPosts] = useState<BlogContent['blogPosts']>([]);
   const [currentPost, setCurrentPost] = useState<BlogContent['currentPost']>();
+  const [errorMessage, setErrorMessage] = useState<any>(null);
+
+  const getBlogPosts = useCallback(async () => {
+    try {
+      const response = await jsonServer.get('/blogposts');
+      setBlogPosts(response.data.results);
+    } catch (err: any) {
+      setErrorMessage(err);
+    }
+  }, []);
 
   const addBlogPost = useCallback(
     (title: string, content: string, callback: () => void) => {
@@ -102,8 +115,16 @@ export function MyBlogProvider({children}: {children: React.ReactNode}) {
       editBlogPost,
       currentPost,
       setCurrentPost,
+      getBlogPosts,
     }),
-    [addBlogPost, blogPosts, currentPost, deleteBlogPost, editBlogPost],
+    [
+      addBlogPost,
+      blogPosts,
+      currentPost,
+      deleteBlogPost,
+      editBlogPost,
+      getBlogPosts,
+    ],
   );
 
   return (
