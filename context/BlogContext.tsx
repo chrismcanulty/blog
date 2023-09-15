@@ -66,18 +66,20 @@ export function MyBlogProvider({children}: {children: React.ReactNode}) {
   }, []);
 
   const addBlogPost = useCallback(
-    (title: string, content: string, callback: () => void) => {
-      setBlogPosts([
-        ...blogPosts,
-        {
-          id: Math.floor(Math.random() * 99999),
-          title: title,
-          content: content,
-        },
-      ]);
+    async (title: string, content: string, callback: () => void) => {
+      await jsonServer.post('/blogposts', {title, content});
+      // setBlogPosts([
+      //   ...blogPosts,
+      //   {
+      //     id: Math.floor(Math.random() * 99999),
+      //     title: title,
+      //     content: content,
+      //   },
+      // ]);
       callback();
     },
-    [blogPosts],
+    // [blogPosts],
+    [],
   );
 
   const deleteBlogPost = useCallback(
