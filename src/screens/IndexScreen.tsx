@@ -40,7 +40,7 @@ const IndexScreen = ({navigation}: any) => {
       <FlatList
         data={blogPosts}
         keyExtractor={blogPost => `${blogPost.id}`}
-        renderItem={({item, index}) => {
+        renderItem={({item}) => {
           return (
             <TouchableOpacity
               onPress={() => navigation.navigate('Show', {id: item.id})}>
@@ -48,7 +48,7 @@ const IndexScreen = ({navigation}: any) => {
                 <BlogPost>
                   {item.title} - {item.id}
                 </BlogPost>
-                <TouchableOpacity onPress={() => deleteBlogPost(index)}>
+                <TouchableOpacity onPress={() => deleteBlogPost(item.id)}>
                   <DeleteIcon name="trash" size={24} color="#900" />
                 </TouchableOpacity>
               </BlogView>
