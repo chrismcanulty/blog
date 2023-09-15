@@ -58,7 +58,8 @@ export function MyBlogProvider({children}: {children: React.ReactNode}) {
   const getBlogPosts = useCallback(async () => {
     try {
       const response = await jsonServer.get('/blogposts');
-      setBlogPosts(response.data.results);
+      console.log('response', response.data);
+      setBlogPosts(response.data);
     } catch (err: any) {
       setErrorMessage(err);
     }
@@ -110,6 +111,8 @@ export function MyBlogProvider({children}: {children: React.ReactNode}) {
     () => ({
       blogPosts,
       setBlogPosts,
+      errorMessage,
+      setErrorMessage,
       addBlogPost,
       deleteBlogPost,
       editBlogPost,
@@ -120,6 +123,7 @@ export function MyBlogProvider({children}: {children: React.ReactNode}) {
     [
       addBlogPost,
       blogPosts,
+      errorMessage,
       currentPost,
       deleteBlogPost,
       editBlogPost,

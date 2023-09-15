@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, FlatList, TouchableOpacity} from 'react-native';
 import {useBlogContext} from '../../context/BlogContext';
 import styled from 'styled-components/native';
@@ -21,7 +21,11 @@ const BlogView = styled.View`
 `;
 
 const IndexScreen = ({navigation}: NativeStackHeaderProps) => {
-  const {blogPosts, deleteBlogPost} = useBlogContext();
+  const {blogPosts, deleteBlogPost, getBlogPosts} = useBlogContext();
+
+  useEffect(() => {
+    getBlogPosts();
+  }, [getBlogPosts]);
 
   return (
     <View>
