@@ -57,7 +57,6 @@ export function MyBlogProvider({children}: {children: React.ReactNode}) {
   const getBlogPosts = useCallback(async () => {
     try {
       const response = await jsonServer.get('/blogposts');
-      console.log('response', response.data);
       setBlogPosts(response.data);
     } catch (err: any) {
       setErrorMessage(err);
