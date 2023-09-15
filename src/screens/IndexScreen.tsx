@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import {View, FlatList, TouchableOpacity} from 'react-native';
 import {useBlogContext} from '../../context/BlogContext';
 import styled from 'styled-components/native';
-import {NativeStackHeaderProps} from '@react-navigation/native-stack';
 import DeleteIcon from 'react-native-vector-icons/FontAwesome';
 
 const BlogPost = styled.Text`
@@ -20,12 +19,21 @@ const BlogView = styled.View`
   border-color: gray;
 `;
 
-const IndexScreen = ({navigation}: NativeStackHeaderProps) => {
+const IndexScreen = ({navigation}: any) => {
   const {blogPosts, deleteBlogPost, getBlogPosts} = useBlogContext();
 
   useEffect(() => {
     getBlogPosts();
-  }, [getBlogPosts]);
+    // add listener to detect if user has navigated to IndexScreen
+    const listener = navigation.addListener('focus', () => {
+      getBlogPosts();
+
+      // cleanup function to remove listener
+      return () => {
+        listener.remove();
+      };
+    });
+  }, [navigation, getBlogPosts]);
 
   return (
     <View>
